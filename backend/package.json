@@ -1,0 +1,17 @@
+{
+  "name": "boat-trip-meal-selector-backend",
+  "version": "1.0.0",
+  "description": "Backend API for the Boat Trip Meal Selector — Google Sheets integration",
+  "private": true,
+  "type": "module",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "node --watch src/server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
+    "googleapis": "^148.0.0"
+  }
+}

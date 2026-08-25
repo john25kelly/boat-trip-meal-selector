@@ -1,4 +1,4 @@
-import { MEAL_CHOICES } from '../models/participant'
+import { DEFAULT_MEAL, DESSERT_CHOICES, MAIN_CHOICES, STARTER_CHOICES } from '../models/participant'
 import { apiRequest } from './apiClient'
 
 const USE_MOCK_API = import.meta.env.VITE_USE_MOCK_API !== 'false'
@@ -7,19 +7,27 @@ let mockParticipants = [
   {
     id: 'p-1',
     name: 'Skipper Sam',
-    mealChoice: 'Fish',
+    starter: 'Soup',
+    main: 'Fish',
+    dessert: 'None',
     updatedAt: new Date().toISOString(),
   },
   {
     id: 'p-2',
     name: 'Deckhand Aileen',
-    mealChoice: 'Vegetarian',
+    starter: 'None',
+    main: 'Vegetarian pasta',
+    dessert: 'Cheesecake',
     updatedAt: new Date().toISOString(),
   },
 ]
 
-function ensureMealChoice(mealChoice) {
-  return MEAL_CHOICES.includes(mealChoice) ? mealChoice : 'No preference'
+function normalizeMeal({ starter, main, dessert } = {}) {
+  return {
+    starter: STARTER_CHOICES.includes(starter) ? starter : 'None',
+    main: MAIN_CHOICES.includes(main) ? main : 'None',
+    dessert: DESSERT_CHOICES.includes(dessert) ? dessert : 'None',
+  }
 }
 
 function delay() {
@@ -37,11 +45,11 @@ export async function listParticipants() {
   return [...mockParticipants]
 }
 
-export async function addParticipant(name, mealChoice = 'No preference') {
+export async function addParticipant(name, meal = DEFAULT_MEAL) {
   if (!USE_MOCK_API) {
     return apiRequest('/participants', {
       method: 'POST',
-      body: JSON.stringify({ name, mealChoice }),
+      body: JSON.stringify({ name, ...normalizeMeal(meal) }),
     })
   }
 
@@ -49,7 +57,7 @@ export async function addParticipant(name, mealChoice = 'No preference') {
   const participant = {
     id: `p-${crypto.randomUUID()}`,
     name,
-    mealChoice: ensureMealChoice(mealChoice),
+    ...normalizeMeal(meal),
     updatedAt: new Date().toISOString(),
   }
 
@@ -57,21 +65,21 @@ export async function addParticipant(name, mealChoice = 'No preference') {
   return participant
 }
 
-export async function updateParticipantMeal(participantId, mealChoice) {
+export async function updateParticipantMeal(participantId, meal) {
   if (!USE_MOCK_API) {
     return apiRequest(`/participants/${participantId}/meal`, {
       method: 'PATCH',
-      body: JSON.stringify({ mealChoice }),
+      body: JSON.stringify(normalizeMeal(meal)),
     })
   }
 
   await delay()
-  const normalizedMealChoice = ensureMealChoice(mealChoice)
+  const normalized = normalizeMeal(meal)
   mockParticipants = mockParticipants.map((participant) =>
     participant.id === participantId
       ? {
           ...participant,
-          mealChoice: normalizedMealChoice,
+          ...normalized,
           updatedAt: new Date().toISOString(),
         }
       : participant,
