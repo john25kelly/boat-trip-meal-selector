@@ -48,9 +48,9 @@ export function ParticipantsPage() {
     }
   }
 
-  const handleAdd = async ({ name, mealChoice }) => {
+  const handleAdd = async ({ name, meal }) => {
     await withFeedback(async () => {
-      const created = await addParticipant(name, mealChoice)
+      const created = await addParticipant(name, meal)
       setParticipants((current) => [created, ...current])
     }, `${name} added to the list.`)
   }
