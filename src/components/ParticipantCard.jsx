@@ -1,6 +1,18 @@
-import { MEAL_CHOICES } from '../models/participant'
+import { DESSERT_OPTIONS, MAIN_OPTIONS, STARTER_OPTIONS } from '../models/participant'
 
 export function ParticipantCard({ participant, onMealChange, onRemove, busy }) {
+  const starter = participant.starter ?? 'None'
+  const main = participant.main ?? 'None'
+  const dessert = participant.dessert ?? 'None'
+
+  const handleChange = (field, value) => {
+    onMealChange(participant.id, {
+      starter: field === 'starter' ? value : starter,
+      main: field === 'main' ? value : main,
+      dessert: field === 'dessert' ? value : dessert,
+    })
+  }
+
   return (
     <article className="card participant-card">
       <div>
@@ -9,13 +21,41 @@ export function ParticipantCard({ participant, onMealChange, onRemove, busy }) {
       </div>
       <div className="participant-actions">
         <label>
-          Meal choice
+          Starter
           <select
-            value={participant.mealChoice}
+            value={starter}
             disabled={busy}
-            onChange={(event) => onMealChange(participant.id, event.target.value)}
+            onChange={(event) => handleChange('starter', event.target.value)}
           >
-            {MEAL_CHOICES.map((option) => (
+            {STARTER_OPTIONS.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Main
+          <select
+            value={main}
+            disabled={busy}
+            onChange={(event) => handleChange('main', event.target.value)}
+          >
+            {MAIN_OPTIONS.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Dessert
+          <select
+            value={dessert}
+            disabled={busy}
+            onChange={(event) => handleChange('dessert', event.target.value)}
+          >
+            {DESSERT_OPTIONS.map((option) => (
               <option key={option} value={option}>
                 {option}
               </option>

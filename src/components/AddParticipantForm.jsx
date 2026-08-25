@@ -1,9 +1,11 @@
 import { useState } from 'react'
-import { MEAL_CHOICES } from '../models/participant'
+import { DESSERT_OPTIONS, MAIN_OPTIONS, STARTER_OPTIONS } from '../models/participant'
 
 export function AddParticipantForm({ onAdd, busy }) {
   const [name, setName] = useState('')
-  const [mealChoice, setMealChoice] = useState('No preference')
+  const [starter, setStarter] = useState('None')
+  const [main, setMain] = useState('None')
+  const [dessert, setDessert] = useState('None')
 
   const handleSubmit = async (event) => {
     event.preventDefault()
@@ -12,9 +14,11 @@ export function AddParticipantForm({ onAdd, busy }) {
       return
     }
 
-    await onAdd({ name: name.trim(), mealChoice })
+    await onAdd({ name: name.trim(), starter, main, dessert })
     setName('')
-    setMealChoice('No preference')
+    setStarter('None')
+    setMain('None')
+    setDessert('None')
   }
 
   return (
@@ -33,14 +37,44 @@ export function AddParticipantForm({ onAdd, busy }) {
           />
         </label>
         <label>
-          Meal
+          Starter
           <select
-            name="participantMeal"
-            value={mealChoice}
-            onChange={(event) => setMealChoice(event.target.value)}
+            name="participantStarter"
+            value={starter}
+            onChange={(event) => setStarter(event.target.value)}
             disabled={busy}
           >
-            {MEAL_CHOICES.map((option) => (
+            {STARTER_OPTIONS.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Main
+          <select
+            name="participantMain"
+            value={main}
+            onChange={(event) => setMain(event.target.value)}
+            disabled={busy}
+          >
+            {MAIN_OPTIONS.map((option) => (
+              <option key={option} value={option}>
+                {option}
+              </option>
+            ))}
+          </select>
+        </label>
+        <label>
+          Dessert
+          <select
+            name="participantDessert"
+            value={dessert}
+            onChange={(event) => setDessert(event.target.value)}
+            disabled={busy}
+          >
+            {DESSERT_OPTIONS.map((option) => (
               <option key={option} value={option}>
                 {option}
               </option>
