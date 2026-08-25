@@ -4,6 +4,7 @@ React-based self-service meal selection app for Leisure 17 boats and the EDYC bo
 
 ## What is included
 
+
 - Polished nautical-themed React UI (mobile + desktop)
 - Landing/login page
 - Protected application shell
