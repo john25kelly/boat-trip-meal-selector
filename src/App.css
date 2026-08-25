@@ -1,0 +1,168 @@
+#root {
+  min-height: 100vh;
+  padding: 1rem;
+}
+
+.card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 1rem;
+  border: 1px solid #d5e7f9;
+  box-shadow: 0 8px 22px rgba(7, 55, 99, 0.08);
+}
+
+.card--compact {
+  margin-bottom: 0.75rem;
+}
+
+.eyebrow {
+  font-weight: 600;
+  color: #2b6cb0;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.75rem;
+}
+
+.meta {
+  color: #4a6783;
+  font-size: 0.9rem;
+}
+
+.landing {
+  min-height: calc(100vh - 2rem);
+  display: grid;
+  place-items: center;
+}
+
+.hero-card {
+  max-width: 640px;
+  display: grid;
+  gap: 0.9rem;
+}
+
+.login-form,
+.grid {
+  display: grid;
+  gap: 0.65rem;
+}
+
+.grid.two-column {
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+}
+
+label {
+  display: grid;
+  gap: 0.35rem;
+  font-weight: 600;
+}
+
+input,
+select {
+  width: 100%;
+  padding: 0.6rem 0.7rem;
+  border-radius: 10px;
+  border: 1px solid #bdd5ed;
+  background-color: #fff;
+}
+
+button {
+  padding: 0.6rem 0.9rem;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  background: #1e5fa5;
+  color: #fff;
+  font-weight: 600;
+}
+
+button:hover:enabled {
+  background: #174d86;
+}
+
+button:disabled {
+  opacity: 0.65;
+  cursor: default;
+}
+
+.app-shell {
+  display: grid;
+  gap: 0.75rem;
+  max-width: 1020px;
+  margin: 0 auto;
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.top-bar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.participants-page {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.participant-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 0.75rem;
+}
+
+.participant-card {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.participant-actions {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.button-danger {
+  background: #c04f5e;
+}
+
+.button-danger:hover:enabled {
+  background: #9f3b49;
+}
+
+.status-message {
+  padding: 0.65rem 0.8rem;
+  border-radius: 10px;
+  font-weight: 500;
+}
+
+.status-message--success {
+  color: #0e5f37;
+  background: #dbf8e8;
+}
+
+.status-message--error {
+  color: #9f2b3a;
+  background: #fde6ea;
+}
+
+.status-message--info {
+  color: #124570;
+  background: #dfedf9;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 1.2rem;
+  display: grid;
+  gap: 0.4rem;
+}
+
+.loading {
+  max-width: 1020px;
+  margin: 1rem auto;
+}
