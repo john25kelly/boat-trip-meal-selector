@@ -17,6 +17,7 @@ React-based self-service meal selection app for Leisure 17 boats and the EDYC bo
 
 ## Architecture
 
+
 The spreadsheet is the **source of truth**, but credentials are never exposed in the browser.
 
 ### Frontend (this repo)
